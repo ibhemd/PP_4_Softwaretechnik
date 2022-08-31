@@ -9,11 +9,8 @@ public class KnapsackFitnessEvaluator implements FitnessEvaluator {
 
     @Override
     public void evaluate(List<Solution> population) {
-        for (Solution s : population) {
-            int f =
-            s.setFitness(f);
-        }
         population.stream()
-                .forEach(s -> s.setFitness(0)); // Fitnessberechnung?
+                .map(s -> (KnapsackSolution) s) // cast Solution zu KnapsackSolution
+                .forEach(s -> s.setFitness(s.getItemsInKnapsackValue())); // setze Knapsack-Value als Fitness
     }
 }
