@@ -21,7 +21,7 @@ public class KnapsackMutation implements EvolutionaryOperator {
         // Exception, wenn keine Mutation möglich ist
         boolean canDeleteItem = true;
         boolean canAddItem = true;
-        if (newKnapsackSolution.getItemsNotInKnapsackList().size() == 0) { // wenn Liste der Items im Knapsack leer ist
+        if (newKnapsackSolution.getItemsInKnapsackList().size() == 0) { // wenn Liste der Items im Knapsack leer ist
             canDeleteItem = false;
         }
         if (newKnapsackSolution.getItemsNotInKnapsackList().size() == 0 // wenn Liste der hinzuzufügenden Elemente leer ist
@@ -30,20 +30,25 @@ public class KnapsackMutation implements EvolutionaryOperator {
         }
         if (!canAddItem && !canDeleteItem) { // werfe Exception
             throw new EvolutionException("Kann keine Mutation ausführen");
-        }
-
-        // Zufallsvariable für "switch case"
-        Random random = new Random();
-        int randomIndex = random.nextInt(2);
-
-        // "switch case" für Mutationsvariante
-        if (randomIndex < 1) { // entferne zufälliges Item
-            // mutiere Liste
-            return DeleteRandomItem.deleteRandomItem(newKnapsackSolution);
-        } else { // füge neues Item hinzu
-            // mutiere Liste
+        } else if (!canDeleteItem) {
             return AddRandomItem.addRandomItem(newKnapsackSolution);
+        } else if (!canAddItem) {
+            return DeleteRandomItem.deleteRandomItem(newKnapsackSolution);
+        } else {
+            // Zufallsvariable für "switch case"
+            Random random = new Random();
+            int randomIndex = random.nextInt(2);
+
+            // "switch case" für Mutationsvariante
+            if (randomIndex < 1) { // entferne zufälliges Item
+                // mutiere Liste
+                return DeleteRandomItem.deleteRandomItem(newKnapsackSolution);
+            } else { // füge neues Item hinzu
+                // mutiere Liste
+                return AddRandomItem.addRandomItem(newKnapsackSolution);
+            }
         }
+
     }
 
     static class DeleteRandomItem {

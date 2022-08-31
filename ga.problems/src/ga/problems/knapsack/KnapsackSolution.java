@@ -29,6 +29,7 @@ public class KnapsackSolution extends Solution {
         this.itemsNotInKnapsackList = new ArrayList<>();
         this.itemsNotInKnapsackList.addAll(oldKnapsackSolution.itemsNotInKnapsackList);
         this.itemsInKnapsackWeight = oldKnapsackSolution.itemsInKnapsackWeight;
+        this.itemsInKnapsackValue = oldKnapsackSolution.itemsInKnapsackValue;
         this.itemCount = oldKnapsackSolution.itemCount;
         this.capacity = oldKnapsackSolution.capacity;
     }

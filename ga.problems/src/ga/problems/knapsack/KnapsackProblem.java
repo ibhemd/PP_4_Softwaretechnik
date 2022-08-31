@@ -40,7 +40,7 @@ public class KnapsackProblem implements Problem {
             int randomIndex = random.nextInt(itemList.size());
             Item randomItem = itemList.get(randomIndex);
 
-            // wenn zufälliges Item in Knapsack pack, füge Item dem Knapsack hinzu und lösche Item aus Listen
+            // wenn zufälliges Item in Knapsack passt, füge Item dem Knapsack hinzu und lösche Item aus Listen
             if (randomItem.getWeight() < (knapsackCapacity-itemsInKnapsackWeight)) {
                 itemsInKnapsackList.add(randomItem); // füge Item dem Rucksack hinzu
                 itemsInKnapsackWeight += randomItem.getWeight(); // füge Weight dem Knapsack hinzu
