@@ -13,7 +13,7 @@ public class GeneticAlgorithm {
 
     Problem problem;
     int populationSize;
-    List<EvolutionaryOperator> evolutionaryOperatorList;
+    List<EvolutionaryOperator> evolutionaryOperatorList = new ArrayList<>();
     FitnessEvaluator fitnessEvaluator;
     SurvivalOperator survivalOperator;
     SelectionOperator selectionOperator;
@@ -71,8 +71,22 @@ public class GeneticAlgorithm {
     }
 
     public class WithPopulationsSize {
-        public EvolvingSolutionsWith withPopulationsSize(int i) {
+        public SurviveWith withPopulationsSize(int i) {
             populationSize = i;
+            return new SurviveWith();
+        }
+    }
+
+    public class SurviveWith {
+        public SelectWith surviveWith(SurvivalOperator sO) {
+            survivalOperator = sO;
+            return new SelectWith();
+        }
+    }
+
+    public class SelectWith {
+        public EvolvingSolutionsWith selectWith(SelectionOperator sO) {
+            selectionOperator = sO;
             return new EvolvingSolutionsWith();
         }
     }
@@ -105,10 +119,14 @@ public class GeneticAlgorithm {
         Problem yourProblem = null;
         EvolutionaryOperator yourEvolutionaryOperator = null;
         FitnessEvaluator yourFitnessEvaluator = null;
+        SurvivalOperator yourSurvivalOperator = null;
+        SelectionOperator yourSelectionOperator = null;
 
         GeneticAlgorithm ga = new GeneticAlgorithm();
         List<Solution> result = ga.solve(yourProblem)
                 .withPopulationsSize(10)
+                .surviveWith(yourSurvivalOperator)
+                .selectWith(yourSelectionOperator)
                 .evolvingSolutionsWith(yourEvolutionaryOperator)
                 .evolvingSolutionsWith(yourEvolutionaryOperator)
                 .evaluatingSolutionsWith(yourFitnessEvaluator)

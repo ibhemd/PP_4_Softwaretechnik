@@ -28,5 +28,10 @@ public abstract class Solution {
 
 	public Problem getProblem() {
 		return problem;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "Fitness (Value): " + getFitness() + "\n";
+	}
 }
